@@ -1,12 +1,8 @@
 from typing import Optional
-
 import requests
 import json
-from pydantic import BaseModel
-import litellm
 from litellm import CustomLLM
 import os
-
 from pydantic.dataclasses import dataclass
 
 
@@ -22,7 +18,15 @@ class CustomAPI(CustomLLM):
         self.api_key_env_var = api_key_env_var
         self.model = model
 
-    def completion(self, messages: list[dict], *args, **kwargs): # -> litellm.ModelResponse:
+    def completion(self,
+                   messages: list[dict],
+                   *args: dict,
+                   stream: bool = False,
+                   max_tokens: int = 4096,
+                   temperature: float = 1.,
+                   presence_penalty: float = 0.,
+                   frequency_penalty: float = 0.,
+                   **kwargs: dict): # -> litellm.ModelResponse:
 
         response = requests.post(
             url=self.api_base,
@@ -34,25 +38,14 @@ class CustomAPI(CustomLLM):
             data=json.dumps({
               "model": self.model,  # Optional
               "messages": messages,
-              "stream": False, # https://openrouter.ai/docs/api-reference/streaming
-              "max_tokens": 100,
-              "temperature": 1.,
-              "presence_penalty": 0,
-              "frequency_penalty": 0
+              "stream": stream, # https://openrouter.ai/docs/api-reference/streaming
+              "max_tokens": max_tokens,
+              "temperature": temperature,
+              "presence_penalty": presence_penalty,
+              "frequency_penalty": frequency_penalty
             })
           )
 
-
         response.raise_for_status()
         return response
-
-
-custom_api = CustomAPI(api_base="https://openrouter.ai/api/v1/chat/completions",
-                       api_key_env_var='OPENROUTER_DEEPSEEK_V3_BASE_FREE_API_KEY',
-                       model="deepseek/deepseek-v3-base:free")
-
-
-litellm.custom_provider_map = [ # 👈 KEY STEP - REGISTER HANDLER
-        {"provider": "custom_api", "custom_handler": custom_api}
-    ]
 

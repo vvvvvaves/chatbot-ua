@@ -18,8 +18,9 @@ def build_request(query: str) -> LLMRequest:
 def send_request(query: str) -> Any:
     # llm_request = build_request(query)
     # response = llm_request.send_request()
-    response = custom_api.completion([{"role": "user", "content": query}])
+    response = custom_api.completion([{"role": "user", "content": query}], max_tokens=100)
     print(type(response))
     print(response)
+    print(type(response.json()))
     print(response.json())
 
