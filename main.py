@@ -1,4 +1,4 @@
-from src.chatbot_ua.app import app
+from src.backend.app import app
 
 
 

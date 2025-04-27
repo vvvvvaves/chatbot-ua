@@ -1,7 +1,7 @@
 import yaml
 import os
 from yaml.loader import SafeLoader
-from src.chatbot_ua.llm.api.custom_api import CustomAPI
+from src.backend.llm.api.custom_api import CustomAPI
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.join(PROJECT_ROOT, 'config.yaml')

@@ -1,6 +1,6 @@
 from typing import Any
 from fastapi import FastAPI
-from src.chatbot_ua.objects.chat import LLMRequest
+from src.backend.objects.chat import LLMRequest
 from config import get_api
 
 
