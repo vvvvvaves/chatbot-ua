@@ -1,0 +1,5 @@
+deploy:
+  model: deepseek/deepseek-v3-base:free
+
+test:
+  model: deepseek/deepseek-v3-base:free

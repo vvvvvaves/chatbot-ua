@@ -36,7 +36,7 @@ class CustomAPI(CustomLLM):
               "messages": messages,
               "stream": False, # https://openrouter.ai/docs/api-reference/streaming
               "max_tokens": 100,
-              "temperature": 0.7,
+              "temperature": 1.,
               "presence_penalty": 0,
               "frequency_penalty": 0
             })

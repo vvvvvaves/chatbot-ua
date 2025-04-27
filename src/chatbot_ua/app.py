@@ -1,9 +1,12 @@
 from typing import Any
-
 from fastapi import FastAPI
 from src.chatbot_ua.objects.chat import LLMRequest
-from src.chatbot_ua.llm.api.custom_api import custom_api
+from config import get_api
+
+
 app = FastAPI()
+
+custom_api = get_api(run="deploy")
 
 
 def build_request(query: str) -> LLMRequest:
