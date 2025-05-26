@@ -2,3 +2,6 @@
 	path = projects/backend
 	url = https://github.com/vvvvvaves/chatbot-ua-backend
 	
+[submodule "projects/[legacy] frontend"]
+	path = projects/[legacy] frontend
+	url = https://github.com/vvvvvaves/chatbot-ua-frontend
